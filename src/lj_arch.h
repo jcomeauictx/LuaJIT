@@ -340,10 +340,7 @@
 #error "No support for PowerPC CPUs without double-precision FPU"
 #endif
 #if defined(_LITTLE_ENDIAN)
-#error "No support for little-endian PowerPC"
-#endif
-#if defined(_LP64)
-#error "No support for PowerPC 64 bit mode"
+#define LJ_ARCH_ENDIAN		LUAJIT_LE
 #endif
 #elif LJ_TARGET_MIPS
 #if defined(__mips_soft_float)
