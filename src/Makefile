@@ -563,7 +563,7 @@ endif
 endif
 endif
 
-Q= @
+Q?= @
 E= @echo
 #Q=
 #E= @:
