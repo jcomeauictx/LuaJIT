@@ -570,6 +570,7 @@ E= @echo
 #E= @:
 
 ifeq (,$(Q))
+  HOST_CFLAGS += -DVERBOSE
 export
 endif
 

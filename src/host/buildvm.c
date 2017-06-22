@@ -195,6 +195,9 @@ static int build_code(BuildCtx *ctx)
 
   /* Finalize the code. */
   (void)dasm_checkstep(Dst, -1);
+  #ifdef VERBOSE
+  fprintf(stderr, "calling dasm_link\n");
+  #endif
   if ((status = dasm_link(Dst, &ctx->codesz))) return status;
   ctx->code = (uint8_t *)malloc(ctx->codesz);
   if ((status = dasm_encode(Dst, (void *)ctx->code))) return status;
