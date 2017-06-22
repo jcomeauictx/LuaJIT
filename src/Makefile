@@ -563,10 +563,15 @@ endif
 endif
 endif
 
+# `make Q=` for verbose mode
 Q?= @
 E= @echo
 #Q=
 #E= @:
+
+ifeq (,$(Q))
+export
+endif
 
 ##############################################################################
 # Make targets.
@@ -594,6 +599,9 @@ depend:
 	@for file in $(ALL_HDRGEN); do \
 	  test -s $$file || $(HOST_RM) $$file; \
 	  done
+
+env set:  # see what the environment looks like (must use `make Q=`)
+	$@
 
 .PHONY: default all amalg clean depend
 

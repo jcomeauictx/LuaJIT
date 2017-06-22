@@ -143,6 +143,9 @@ uninstall:
 	$(RMDIR) $(UNINSTALL_DIRS) || :
 	@echo "==== Successfully uninstalled LuaJIT $(VERSION) from $(PREFIX) ===="
 
+env set:  # see what environment looks like
+	$(MAKE) -C src $@
+
 ##############################################################################
 
 amalg:
