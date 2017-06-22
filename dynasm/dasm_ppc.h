@@ -263,7 +263,13 @@ int dasm_link(Dst_DECL, size_t *szp)
 
 #ifdef DASM_CHECKS
   *szp = 0;
+  #ifdef VERBOSE
+  fprintf(stderr, "D->status: 0x%x\n", D->status);
+  #endif
   if (D->status != DASM_S_OK) return D->status;
+  #ifdef VERBOSE
+  fprintf(stderr, "DASM_CHECKS status good so far\n");
+  #endif
   {
     int pc;
     for (pc = 0; pc*sizeof(int) < D->pcsize; pc++)
