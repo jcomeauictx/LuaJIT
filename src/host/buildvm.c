@@ -200,6 +200,9 @@ static int build_code(BuildCtx *ctx)
   #endif
   if ((status = dasm_link(Dst, &ctx->codesz))) return status;
   ctx->code = (uint8_t *)malloc(ctx->codesz);
+  #ifdef VERBOSE
+  fprintf(stderr, "calling dasm_encode\n");
+  #endif
   if ((status = dasm_encode(Dst, (void *)ctx->code))) return status;
 
   /* Allocate symbol table and bytecode offsets. */
