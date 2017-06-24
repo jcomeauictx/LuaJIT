@@ -1,0 +1,4 @@
+gives error Error: DASM error 11000d7e
+
+the 11000000 code is for immediate operand error. the 0xd7e offset is the
+"action list" item, whatever that is.
