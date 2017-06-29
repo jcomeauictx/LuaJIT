@@ -9,7 +9,19 @@
 #include <string.h>
 #include <stdlib.h>
 
+#ifndef _LP64
+#warning 32 bit PPC detected
 #define DASM_ARCH		"ppc"
+#else
+#warning 64 bit PPC detected
+#ifdef _LITTLE_ENDIAN
+#warning PPC64le detected
+#define DASM_ARCH		"ppc64le"
+#else
+#warning PPC64 (big-endian) detected
+#define DASM_ARCH		"ppc64"
+#endif
+#endif
 
 #ifndef DASM_EXTERN
 #define DASM_EXTERN(a,b,c,d)	0
