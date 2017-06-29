@@ -5013,9 +5013,9 @@ static int build_backend(BuildCtx *ctx)
 {
   int op;
   dasm_growpc(Dst, BC__MAX);
-#ifdef VERBOSE
+  #ifdef VERBOSE
   fprintf(stderr, "building PPC backend\n");
-#endif
+  #endif
 
   build_subroutines(ctx);
 

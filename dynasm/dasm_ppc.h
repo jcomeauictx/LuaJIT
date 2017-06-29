@@ -96,6 +96,9 @@ struct dasm_State {
 /* Initialize DynASM state. */
 void dasm_init(Dst_DECL, int maxsection)
 {
+  #ifdef VERBOSE
+  fprintf(stderr, "dasm_init() for PPC\n");
+  #endif
   dasm_State *D;
   size_t psz = 0;
   int i;
@@ -115,6 +118,9 @@ void dasm_init(Dst_DECL, int maxsection)
     D->sections[i].bsize = 0;
     D->sections[i].epos = 0;  /* Wrong, but is recalculated after resize. */
   }
+  #ifdef VERBOSE
+  fprintf(stderr, "D->status: %x\n", D->status);
+  #endif
 }
 
 /* Free DynASM state. */
@@ -133,9 +139,15 @@ void dasm_free(Dst_DECL)
 /* Setup global label array. Must be called before dasm_setup(). */
 void dasm_setupglobal(Dst_DECL, void **gl, unsigned int maxgl)
 {
+  #ifdef VERBOSE
+  fprintf(stderr, "dasm_setupglobal() for PPC\n");
+  #endif
   dasm_State *D = Dst_REF;
   D->globals = gl - 10;  /* Negative bias to compensate for locals. */
   DASM_M_GROW(Dst, int, D->lglabels, D->lgsize, (10+maxgl)*sizeof(int));
+  #ifdef VERBOSE
+  fprintf(stderr, "D->status: %x\n", D->status);
+  #endif
 }
 
 /* Grow PC label array. Can be called after dasm_setup(), too. */
@@ -166,6 +178,7 @@ void dasm_setup(Dst_DECL, const void *actionlist)
   }
 #ifdef VERBOSE
   fprintf(stderr, "\r\n");
+  fprintf(stderr, "D->status: %x\n", D->status);
 #endif
 }
 
