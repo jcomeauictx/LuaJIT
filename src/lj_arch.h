@@ -201,21 +201,31 @@
 #endif
 
 #elif LUAJIT_TARGET == LUAJIT_ARCH_PPC
-
-#define LJ_ARCH_NAME		"ppc"
-#if _LP64
-#define LJ_ARCH_BITS		64
-#else
-#define LJ_ARCH_BITS		32
-#endif
-#define LJ_ARCH_ENDIAN		LUAJIT_BE
-#define LJ_TARGET_PPC		1
-#define LJ_TARGET_EHRETREG	3
-#define LJ_TARGET_JUMPRANGE	25	/* +-2^25 = +-32MB */
-#define LJ_TARGET_MASKSHIFT	0
-#define LJ_TARGET_MASKROT	1
-#define LJ_TARGET_UNIFYROT	1	/* Want only IR_BROL. */
-#define LJ_ARCH_NUMMODE		LJ_NUMMODE_DUAL_SINGLE
+ #ifndef _LP64
+  #define LJ_ARCH_BITS		32
+  #define LJ_ARCH_NAME		"ppc"
+  #ifndef _LITTLE_ENDIAN
+   #define LJ_ARCH_ENDIAN	LUAJIT_BE
+  #else
+   #define LJ_ARCH_ENDIAN	LUAJIT_LE
+  #endif
+ #else
+  #define LJ_ARCH_BITS		64
+  #ifndef _LITTLE_ENDIAN
+   #define LJ_ARCH_NAME		"ppc64"
+   #define LJ_ARCH_ENDIAN	LUAJIT_BE
+  #else
+   #define LJ_ARCH_NAME		"ppc64le"
+   #define LJ_ARCH_ENDIAN	LUAJIT_LE
+  #endif
+ #endif
+ #define LJ_TARGET_PPC		1
+ #define LJ_TARGET_EHRETREG	3
+ #define LJ_TARGET_JUMPRANGE	25	/* +-2^25 = +-32MB */
+ #define LJ_TARGET_MASKSHIFT	0
+ #define LJ_TARGET_MASKROT	1
+ #define LJ_TARGET_UNIFYROT	1	/* Want only IR_BROL. */
+ #define LJ_ARCH_NUMMODE		LJ_NUMMODE_DUAL_SINGLE
 
 #if _ARCH_PWR7
 #define LJ_ARCH_VERSION		70

@@ -146,9 +146,15 @@ void dasm_setup(Dst_DECL, const void *actionlist)
   memset((void *)D->lglabels, 0, D->lgsize);
   if (D->pclabels) memset((void *)D->pclabels, 0, D->pcsize);
   for (i = 0; i < D->maxsection; i++) {
+#ifdef VERBOSE
+    fprintf(stderr, "building actionlist for PPC, section: %d\r", i);
+#endif
     D->sections[i].pos = DASM_SEC2POS(i);
     D->sections[i].ofs = 0;
   }
+#ifdef VERBOSE
+  fprintf(stderr, "\r\n");
+#endif
 }
 
 
